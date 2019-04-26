@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sensors</string>
-    <string name="start_the_lightsensoractivity">Start the LightSensorActivity</string>
-    <string name="start_the_proximity_sensor">Start the proximity sensor</string>
+    <string name="app_name">SensorPlayground</string>
+    <string name="hello_sensor_framework">Hello SensorFramework!</string>
+    <string name="name_of_sensor">Name of sensor: %s</string>
 </resources>

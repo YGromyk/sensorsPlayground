@@ -6,21 +6,23 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity {
     private SensorManager sensorManager;
+    private Dictionary<String, Integer> sensorsTable;
+    private List<String> sensorNames;
 
-    private TextView textView;
-    private Button startLightActivityButton;
-    private Button startProximityActivityButton;
+    private ListView listView;
 
 
     @Override
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initSensorComponents();
+        testSensor();
         initView();
     }
 
@@ -36,46 +39,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        textView = findViewById(R.id.textView);
-        textView.setText("");
-        textView.setMovementMethod(new ScrollingMovementMethod());
-        startLightActivityButton = findViewById(R.id.startLightActivityButton);
-        startProximityActivityButton = findViewById(R.id.startProximityActivityButton);
-        startLightActivityButton.setOnClickListener(new View.OnClickListener() {
+        listView = findViewById(R.id.sensorsListView);
+        ArrayAdapter<String> sensorsAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                sensorNames
+        );
+        listView.setAdapter(sensorsAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(LightSensorActivity.class);
-            }
-        });
-        startProximityActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(ProximitySensorActivity.class);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(sensorsTable.get(sensorNames.get(position)));
             }
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        testSensor();
-    }
 
     private void testSensor() {
         List<Sensor> sensors = new ArrayList<>(sensorManager.getSensorList(Sensor.TYPE_ALL));
-        String sensorInfo;
+        sensorNames = new ArrayList<>();
+        sensorsTable = new Hashtable<>();
         for (Sensor sensor : sensors) {
-            sensorInfo = sensor.getName() + "\n"
-                    + sensor.getVendor() + "; "
-                    + sensor.getResolution() + "; "
-                    + sensor.getPower() + "; "
-                    + sensor.getReportingMode() + ".\n";
-            textView.append(sensorInfo);
+            sensorNames.add(sensor.getName());
+            sensorsTable.put(sensor.getName(), sensor.getType());
         }
     }
 
-    private void startActivity(Class<? extends AppCompatActivity> activityToStart) {
-        Intent lightSensorActivity = new Intent(this, activityToStart);
+    private void startActivity(int sensorType) {
+        Intent lightSensorActivity = SensorActivity.getIntentWithParameters(this, sensorType);
         startActivity(lightSensorActivity);
     }
 }
