@@ -26,13 +26,26 @@
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:paddingStart="8dp"
-        android:textColor="@android:color/white"
         android:paddingEnd="8dp"
         android:text="@string/start_the_lightsensoractivity"
         android:textAllCaps="false"
+        android:textColor="@android:color/white"
         android:theme="@style/Widget.AppCompat.Button.Borderless.Colored"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/startProximityActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:paddingStart="8dp"
+        android:textColor="@android:color/white"
+        android:paddingEnd="8dp"
+        android:text="@string/start_the_proximity_sensor"
+        android:textAllCaps="false"
+        android:theme="@style/Widget.AppCompat.Button.Borderless.Colored"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </android.support.constraint.ConstraintLayout>

@@ -16,10 +16,11 @@ import java.util.List;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity {
+    private SensorManager sensorManager;
 
     private TextView textView;
     private Button startLightActivityButton;
-    private SensorManager sensorManager;
+    private Button startProximityActivityButton;
 
 
     @Override
@@ -39,10 +40,17 @@ public class MainActivity extends AppCompatActivity {
         textView.setText("");
         textView.setMovementMethod(new ScrollingMovementMethod());
         startLightActivityButton = findViewById(R.id.startLightActivityButton);
+        startProximityActivityButton = findViewById(R.id.startProximityActivityButton);
         startLightActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startLightSensorActivity();
+                startActivity(LightSensorActivity.class);
+            }
+        });
+        startProximityActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ProximitySensorActivity.class);
             }
         });
     }
@@ -66,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startLightSensorActivity() {
-        Intent lightSensorActivity = new Intent(this, LightSensorActivity.class);
+    private void startActivity(Class<? extends AppCompatActivity> activityToStart) {
+        Intent lightSensorActivity = new Intent(this, activityToStart);
         startActivity(lightSensorActivity);
     }
 }
