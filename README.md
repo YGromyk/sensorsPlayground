@@ -1,2 +1,2 @@
 # SensorsPlayground
-**Just an app to play arround sensors in Android :)**
+**Just an app to play arround the sensors in Android :)**
