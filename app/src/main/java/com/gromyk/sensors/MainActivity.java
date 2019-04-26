@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         textView = findViewById(R.id.textView);
         textView.setText("");
+        textView.setMovementMethod(new ScrollingMovementMethod());
         startLightActivityButton = findViewById(R.id.startLightActivityButton);
-        startLightActivityButton.setOnClickListener(new View.OnClickListener(){
+        startLightActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startLightSensorActivity();
