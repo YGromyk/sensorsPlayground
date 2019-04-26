@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">sensors</string>
+    <string name="start_the_lightsensoractivity">Start the LightSensorActivity</string>
+</resources>
